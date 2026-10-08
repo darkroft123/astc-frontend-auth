@@ -24,7 +24,8 @@ function getAuthApiUrl(): string {
   }
   const scheme = getProtocol();
   const baseDomain = getBaseDomain();
-  return `${scheme}://auth-api.${baseDomain}`;
+  const authHost = baseDomain === "joyit.io" ? "auth-api.astc.joyit.io" : `auth-api.${baseDomain}`;
+  return `${scheme}://${authHost}`;
 }
 
 function getGraphqlEndpoint(): string {
