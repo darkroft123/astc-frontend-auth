@@ -33,13 +33,3 @@ jobs:
           tags: |
             ${{ env.IMAGE }}:latest
             ${{ env.IMAGE }}:${{ github.sha }}
-
-      - name: Make package public
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "=== lista de paquetes del repo ==="
-          gh api repos/${{ github.repository }}/packages --paginate --jq '.[] | {name, package_type, visibility}'
-          echo "=== PATCH ==="
-          gh api --method PATCH repos/${{ github.repository }}/packages/container/astc-frontend-auth \
-            -f visibility=public
